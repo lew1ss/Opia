@@ -1,0 +1,24 @@
+{
+  "name": "opia",
+  "version": "1.0.0",
+  "description": "The project that was promised.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lew1ss/Opia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lew1ss/Opia/issues"
+  },
+  "homepage": "https://github.com/lew1ss/Opia#readme",
+  "dependencies": {
+    "env": "^0.0.2",
+    "express": "^5.2.1"
+  }
+}
