@@ -1,0 +1,3 @@
+npm init -y (creates package.json)
+npm i express dotenv (installs dependencies)
+npm i --save-dev nodemon (installs dev dependency)
