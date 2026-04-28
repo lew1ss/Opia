@@ -1,0 +1,8 @@
+CREATE TABLE opia_session (
+  sid varchar NOT NULL COLLATE "default",
+  sess json NOT NULL,
+  expire timestamp(6) NOT NULL,
+  CONSTRAINT opia_session_pkey PRIMARY KEY (sid)
+);
+
+CREATE INDEX IDX_opia_session_expire ON opia_session (expire);
