@@ -47,6 +47,62 @@ const register = async (req, res) => {
     }
 };
 
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email and password are required.'
+            });
+        }
+
+        const userResult = await pool.query(
+            'SELECT * FROM opia_users WHERE email = $1',
+            [email]
+        );
+
+        if (userResult.rows.length === 0) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid email or password.'
+            });
+        }
+
+        const user = userResult.rows[0];
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordCorrect) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid email or password.'
+            });
+        }
+
+        req.session.user = {
+            id: user.id,
+            username: user.username,
+            email: user.email
+        };
+
+        res.json({
+            success: true,
+            message: 'Login successful.',
+            user: req.session.user
+        });
+        
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Login failed.',
+            error: err.message
+        });
+    }
+};
+
 module.exports = {
-    register
+    register,
+    login
 };
